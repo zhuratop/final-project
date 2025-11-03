@@ -1,0 +1,32 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+.env
+.venv
+venv/
+env/
+pip-wheel-metadata/
+
+# --- Virtualenv names (Windows / PyCharm) ---
+*.venv/
+.vscode/
+.idea/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs / temp ---
+*.log
+*.tmp
+
+# --- Project data (если скачиваешь JSONы) ---
+data/
