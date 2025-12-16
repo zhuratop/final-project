@@ -1,4 +1,7 @@
-def filter_records(records, predicate):
+from typing import List, Dict, Any, Callable, Tuple, Optional
+
+
+def filter_records(records: List[Dict[str, Any]], predicate: Callable[[Dict[str, Any]], bool]) -> List[Dict[str, Any]]:
     """
     Фильтрует записи по произвольной функции.
 
@@ -12,7 +15,7 @@ def filter_records(records, predicate):
     return [r for r in records if predicate(r)]
 
 
-def filter_by_conditions(records, conditions):
+def filter_by_conditions(records: List[Dict[str, Any]], conditions: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     Фильтрует записи по равенству нескольким полям.
 
@@ -35,7 +38,7 @@ def filter_by_conditions(records, conditions):
     return out
 
 
-def group_by_attributes(records, attrs):
+def group_by_attributes(records: List[Dict[str, Any]], attrs: List[str]) -> Dict[Tuple[Any, ...], List[Dict[str, Any]]]:
     """
     Группирует записи по набору полей.
 
@@ -53,7 +56,10 @@ def group_by_attributes(records, attrs):
     return groups
 
 
-def apply_aggregation_to_groups(groups, agg_func):
+def apply_aggregation_to_groups(
+    groups: Dict[Any, List[Dict[str, Any]]], 
+    agg_func: Callable[[List[Dict[str, Any]]], Any]
+) -> Dict[Any, Any]:
     """
     Применяет агрегирующую функцию к каждой группе.
 
@@ -70,7 +76,7 @@ def apply_aggregation_to_groups(groups, agg_func):
     return out
 
 
-def extract_all_prizes(records):
+def extract_all_prizes(records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
     Извлекает все призы из списка лауреатов в один плоский список.
 
@@ -91,7 +97,7 @@ def extract_all_prizes(records):
     return prizes
 
 
-def filter_prizes(prizes, predicate):
+def filter_prizes(prizes: List[Dict[str, Any]], predicate: Callable[[Dict[str, Any]], bool]) -> List[Dict[str, Any]]:
     """
     Фильтрует список призов по условию.
 

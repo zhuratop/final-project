@@ -1,3 +1,5 @@
+from typing import Dict, Any, Callable, List
+
 from core import to_int, date_to_year, create_processor, load_data
 from prizes_configs import prize_processor
 
@@ -23,7 +25,7 @@ CONFIG_ORG = {
 }
 
 
-def person_processor():
+def person_processor() -> Callable[[Dict[str, Any]], Dict[str, Any]]:
     """
     Возвращает готовый процессор для одного человека.
 
@@ -34,7 +36,7 @@ def person_processor():
     return create_processor(CONFIG_PERSON, list_processor=False)
 
 
-def org_processor():
+def org_processor() -> Callable[[Dict[str, Any]], Dict[str, Any]]:
     """
     Возвращает готовый процессор для одной организации.
 

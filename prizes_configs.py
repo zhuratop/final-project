@@ -1,3 +1,4 @@
+from typing import Dict, Any, Callable, List
 from core import create_processor, to_int
 
 CONFIG_PRIZE = {
@@ -9,7 +10,7 @@ CONFIG_PRIZE = {
 }
 
 
-def prize_processor():
+def prize_processor() -> Callable[[List[Dict[str, Any]]], List[Dict[str, Any]]]:
     """
     Возвращает готовый процессор для спискак призов.
 

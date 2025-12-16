@@ -1,4 +1,7 @@
-def add_field(records, field_name, compute_func):
+from typing import List, Dict, Any, Callable, Optional
+
+
+def add_field(records: List[Dict[str, Any]], field_name: str, compute_func: Callable[[Dict[str, Any]], Any]) -> None:
     """
     Добавляет (или переопределяет) поле у каждой записи.
 
@@ -14,7 +17,7 @@ def add_field(records, field_name, compute_func):
         r[field_name] = compute_func(r)
 
 
-def remove_field(records, field_name):
+def remove_field(records: List[Dict[str, Any]], field_name: str) -> None:
     """
     Удаляет поле у всех записей, если оно есть.
 
@@ -30,7 +33,7 @@ def remove_field(records, field_name):
             del r[field_name]
 
 
-def ensure_field(records, field_name, default=None):
+def ensure_field(records: List[Dict[str, Any]], field_name: str, default: Any = None) -> None:
     """
     Гарантирует наличие поля у всех записей. Если поля не было — добавляет со значением default.
 
