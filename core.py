@@ -1,8 +1,9 @@
 import requests
 from collections import Counter
+from typing import Any, Dict, List, Tuple, Optional, Union, Callable, TypeVar
 
 
-def load_data(link):
+def load_data(link: str) -> Dict[str, Any]:
     """
     Загружает данные по указанной ссылке и возвращает распарсенный JSON.
 
@@ -23,7 +24,7 @@ def load_data(link):
     return resp.json()
 
 
-def is_suitable_key(obj):
+def is_suitable_key(obj: Any) -> bool:
     """
     Проверяет, может ли объект использоваться как ключ словаря.
 
@@ -36,7 +37,7 @@ def is_suitable_key(obj):
     return isinstance(obj, (int, float, str, tuple, frozenset, type(None), bool))
 
 
-def to_int(value):
+def to_int(value: Optional[Union[str, int]]) -> Optional[int]:
     """
     Преобразует значение к целому числу, если это возможно.
 
@@ -62,7 +63,7 @@ def to_int(value):
     return None
 
 
-def date_to_year(birth_date):
+def date_to_year(birth_date: Optional[Union[str, int]]) -> Optional[int]:
     """
     Извлекает год из строки даты.
 
@@ -89,7 +90,7 @@ def date_to_year(birth_date):
     return None
 
 
-def extract_nested_value(obj, keys):
+def extract_nested_value(obj: Any, keys: List[Any]) -> Any:
     """
     Безопасно извлекает значение по цепочке ключей из вложенных структур.
 
@@ -122,7 +123,7 @@ def extract_nested_value(obj, keys):
     return cur
 
 
-def _has(d, path):
+def _has(d: Dict[Any, Any], path: List[Any]) -> bool:
     """
     Вспомогательная функция: проверяет, что по указанному пути есть непустое значение.
 
@@ -136,7 +137,7 @@ def _has(d, path):
     return extract_nested_value(d, path) is not None
 
 
-def is_org(rec):
+def is_org(rec: Dict[str, Any]) -> bool:
     """
     Определяет, что запись относится к организации.
 
@@ -157,7 +158,7 @@ def is_org(rec):
     return (hard or soft)
 
 
-def is_person(rec):
+def is_person(rec: Dict[str, Any]) -> bool:
     """
     Определяет, что запись относится к человеку.
 
@@ -180,7 +181,7 @@ def is_person(rec):
     return (hard or soft)
 
 
-def process_dictionary_with_config(dictionary, config):
+def process_dictionary_with_config(dictionary: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any]:
     """
     Обрабатывает один словарь по конфигу и возвращает плоский словарь.
 
@@ -208,7 +209,7 @@ def process_dictionary_with_config(dictionary, config):
     return dict_processed
 
 
-def process_list_of_dicts_with_config(list_of_dicts, config):
+def process_list_of_dicts_with_config(list_of_dicts: List[Dict[str, Any]], config: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     Обрабатывает список словарей по одному и тому же конфигу.
 
@@ -232,7 +233,9 @@ def process_list_of_dicts_with_config(list_of_dicts, config):
     return dicts_processed
 
 
-def create_processor(config, list_processor=False):
+T = TypeVar('T', Dict[str, Any], List[Dict[str, Any]])
+
+def create_processor(config: Dict[str, Any], list_processor: bool = False) -> Callable[[T], T]:
     """
     Создаёт и возвращает функцию-процессор с уже подставленным конфигом.
 

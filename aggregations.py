@@ -1,7 +1,8 @@
 import statistics
+from typing import List, Dict, Any, Union, Optional
 
 
-def _extract_field_values(records, field):
+def _extract_field_values(records: List[Dict[str, Any]], field: str) -> List[Any]:
     """
     Извлекает значения одного поля из списка записей.
 
@@ -19,7 +20,7 @@ def _extract_field_values(records, field):
     return vals
 
 
-def agg_count(records):
+def agg_count(records: List[Dict[str, Any]]) -> int:
     """
     Считает количество записей.
 
@@ -32,7 +33,7 @@ def agg_count(records):
     return len(records)
 
 
-def agg_sum(records, field):
+def agg_sum(records: List[Dict[str, Any]], field: str) -> float:
     """
     Считает сумму по числовому полю.
 
@@ -47,7 +48,7 @@ def agg_sum(records, field):
     return float(sum(vals))
 
 
-def agg_mean(records, field):
+def agg_mean(records: List[Dict[str, Any]], field: str) -> Optional[float]:
     """
     Считает среднее значение по числовому полю.
 
@@ -64,7 +65,7 @@ def agg_mean(records, field):
     return statistics.mean(vals)
 
 
-def agg_median(records, field):
+def agg_median(records: List[Dict[str, Any]], field: str) -> Optional[float]:
     """
     Считает медиану по числовому полю.
 
@@ -81,7 +82,7 @@ def agg_median(records, field):
     return statistics.median(vals)
 
 
-def agg_max(records, field):
+def agg_max(records: List[Dict[str, Any]], field: str) -> Optional[Any]:
     """
     Находит максимальное значение по полю.
 
@@ -98,7 +99,7 @@ def agg_max(records, field):
     return max(vals)
 
 
-def agg_min(records, field):
+def agg_min(records: List[Dict[str, Any]], field: str) -> Optional[Any]:
     """
     Находит минимальное значение по полю.
 
@@ -115,7 +116,7 @@ def agg_min(records, field):
     return min(vals)
 
 
-def top_n(records, field, n=5, reverse=True):
+def top_n(records: List[Dict[str, Any]], field: str, n: int = 5, reverse: bool = True) -> List[Dict[str, Any]]:
     """
     Возвращает top-N записей по значению поля.
 

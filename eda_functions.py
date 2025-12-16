@@ -1,7 +1,8 @@
 from collections import Counter
+from typing import List, Dict, Any, Tuple, Optional, Set
 
 
-def count_records(records):
+def count_records(records: List[Any]) -> int:
     """
     Считает общее число записей.
 
@@ -14,7 +15,7 @@ def count_records(records):
     return len(records)
 
 
-def extract_fields_from_config(config):
+def extract_fields_from_config(config: Dict[str, Any]) -> List[str]:
     """
     Возвращает список имён полей (ключей) из конфига.
 
@@ -27,7 +28,7 @@ def extract_fields_from_config(config):
     return list(config.keys())
 
 
-def split_by_type(records):
+def split_by_type(records: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     """
     Делит записи на людей и организации по полю 'type_'.
 
@@ -47,7 +48,7 @@ def split_by_type(records):
     return persons, orgs
 
 
-def count_missing(records, fields):
+def count_missing(records: List[Dict[str, Any]], fields: List[str]) -> Tuple[Dict[str, int], Dict[str, float]]:
     """
     Считает количество и долю пропусков по указанным полям.
 
@@ -70,7 +71,7 @@ def count_missing(records, fields):
     return counts, ratios
 
 
-def collect_all_prizes(records):
+def collect_all_prizes(records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
     Собирает все призы из лауреатов в один список.
 
@@ -90,7 +91,7 @@ def collect_all_prizes(records):
     return prizes
 
 
-def count_missing_prizes(prizes, prize_config):
+def count_missing_prizes(prizes: List[Dict[str, Any]], prize_config: Dict[str, Any]) -> Tuple[Dict[str, int], Dict[str, float]]:
     """
     Считает пропуски по полям призов.
 
@@ -112,7 +113,7 @@ def count_missing_prizes(prizes, prize_config):
     return counts, ratios
 
 
-def get_award_years_from_rec(rec):
+def get_award_years_from_rec(rec: Dict[str, Any]) -> List[int]:
     """
     Возвращает список годов награждений из одной записи лауреата.
 
@@ -130,7 +131,7 @@ def get_award_years_from_rec(rec):
     return years
 
 
-def get_min_max_id_info(records):
+def get_min_max_id_info(records: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
     """
     Находит минимальный и максимальный id и возвращает их вместе с годами награждения.
 
@@ -162,7 +163,7 @@ def get_min_max_id_info(records):
     }
 
 
-def find_duplicate_ids(records):
+def find_duplicate_ids(records: List[Dict[str, Any]]) -> List[int]:
     """
     Находит id, которые встречаются больше одного раза.
 
@@ -177,7 +178,7 @@ def find_duplicate_ids(records):
     return [i for i, c in cnt.items() if c > 1]
 
 
-def find_id_gaps(records, gap_threshold=1):
+def find_id_gaps(records: List[Dict[str, Any]], gap_threshold: int = 1) -> List[Tuple[int, int]]:
     """
     Ищет разрывы в последовательности id.
 
@@ -196,7 +197,7 @@ def find_id_gaps(records, gap_threshold=1):
     return gaps
 
 
-def round_ratios(ratios, ndigits):
+def round_ratios(ratios: Dict[str, float], ndigits: int) -> Dict[str, float]:
     """
     Округляет все значения в словаре с долями.
 
